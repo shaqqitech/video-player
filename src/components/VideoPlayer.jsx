@@ -5,7 +5,7 @@ import Volume from "./Volume";
 import Speed from "./Speed";
 import PicInPic from "./PicInPic";
 import FullScreen from "./FullScreen";
-import Image from "next/image";
+import SelectFile from "./SelectFile";
 
 const VideoPlayer = () => {
   const videoRef = useRef(null);
@@ -50,16 +50,7 @@ const VideoPlayer = () => {
   return (
     <>
       {showSelectFile && (
-        <div
-          className="w-1/2 h-96 border-2 border-white flex justify-center items-center overflow-hidden flex-col relative rounded-xl cursor-pointer"
-          onClick={handleSelectFileClick}
-        >
-          <Image src={"/image.png"} alt="Image" width={300} height={300} />
-          <div className="font-bold text-xl w-full text-center">
-            Select a file from the{" "}
-            <span className="text-blue-600">Storage</span>
-          </div>
-        </div>
+        <SelectFile />
       )}
       <main
         className={`w-1/2 h-96 border-2 border-white flex justify-center items-center overflow-hidden flex-col relative rounded-xl ${
