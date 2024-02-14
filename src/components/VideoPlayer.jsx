@@ -58,7 +58,7 @@ const VideoPlayer = () => {
     <>
       {showSelectFile && (
         <div
-          className="w-[700px] h-96 border-2 border-white flex justify-center items-center overflow-hidden flex-col relative rounded-xl cursor-pointer"
+          className="w-[700px] h-96 border-4 border-white flex justify-center items-center overflow-hidden flex-col relative rounded-xl cursor-pointer"
           onClick={handleSelectFileClick}
         >
           <Image src={"/image.png"} alt="Image" width={300} height={300} />
@@ -69,7 +69,7 @@ const VideoPlayer = () => {
         </div>
       )}
       <main
-        className={`w-[700px] h-96 border-2 border-white flex justify-center items-center overflow-hidden flex-col relative rounded-xl ${
+        className={`w-[700px] h-96 border-4 border-white flex justify-center items-center overflow-hidden flex-col relative rounded-xl ${
           selectedVideo ? "" : "hidden"
         }`}
         onMouseEnter={showControllerHandler}
