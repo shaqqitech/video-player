@@ -33,7 +33,7 @@ const Speed = ({ videoRef }) => {
   return (
     <>
       {/* speed icons */}
-      <span className="cursor-pointer relative">
+      <span className="cursor-pointer text-white relative">
         <MdSlowMotionVideo size={20} onClick={handleOpen} />
         {open && (
           <ul

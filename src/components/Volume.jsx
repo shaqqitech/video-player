@@ -67,7 +67,7 @@ const Volume = ({ videoRef }) => {
   };
 
   return (
-    <div className="flex space-x-2 items-center">
+    <div className="flex space-x-2 items-center text-white">
       <span onClick={handleVolumeIconClick} className="cursor-pointer">
         {mute ? <FaVolumeMute /> : <FaVolumeUp />}
       </span>

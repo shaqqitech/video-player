@@ -28,7 +28,7 @@ const PlayPause = ({ videoRef }) => {
   return (
     <>
       {/* backward, play/pause, forward icons */}
-      <span className="flex space-x-2">
+      <span className="flex space-x-2 text-white">
         <FaBackward onClick={handleBackward} className="cursor-pointer" />
         <span onClick={handlePlayPause} className="cursor-pointer">
           {play ? <FaPause /> : <FaPlay />}

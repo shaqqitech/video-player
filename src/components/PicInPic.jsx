@@ -14,7 +14,7 @@ const PicInPic = ({ videoRef }) => {
   return (
     <>
       {/* Pic in Pic icons */}
-      <span className="cursor-pointer" onClick={handleTogglePip}>
+      <span className="cursor-pointer text-white" onClick={handleTogglePip}>
         <BsPip size={20} />
       </span>
     </>

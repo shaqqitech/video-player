@@ -19,7 +19,7 @@ const FullScreen = ({videoRef}) => {
   return (
     <>
       {/* Full/Half screen */}
-      <span className="flex space-x-2">
+      <span className="flex space-x-2 text-white">
         <span
           onClick={handleToggleFullScreen}
           className="cursor-pointer"
