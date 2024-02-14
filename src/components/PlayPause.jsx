@@ -19,11 +19,11 @@ const PlayPause = ({ videoRef }) => {
   };
 
   const handleBackward = () => {
-    videoRef.current.currentTime -= 3;
+    videoRef.current.currentTime -= 5;
   };
 
   const handleForward = () => {
-    videoRef.current.currentTime += 3;
+    videoRef.current.currentTime += 5;
   };
   return (
     <>
