@@ -1,11 +1,13 @@
 "use client";
 import React, { useRef, useState } from "react";
+import { IoMdArrowRoundBack } from "react-icons/io";
 import PlayPause from "./PlayPause";
 import Volume from "./Volume";
 import Speed from "./Speed";
 import PicInPic from "./PicInPic";
 import FullScreen from "./FullScreen";
 import Image from "next/image";
+import ProgressBar from "./ProgressBar";
 
 const VideoPlayer = () => {
   const videoRef = useRef(null);
@@ -13,20 +15,15 @@ const VideoPlayer = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [showSelectFile, setShowSelectFile] = useState(true);
 
-  // Function to show the controller and reset timeout
+  // Function to show the controller
   const showControllerHandler = () => {
     setShowController(true);
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => setShowController(false), 3000);
   };
 
   // Function to hide the controller
   const hideControllerHandler = () => {
     setShowController(false);
   };
-
-  // Timeout ID for hiding controller
-  let timeoutId;
 
   // Function to handle video selection
   const handleVideoSelection = (event) => {
@@ -36,22 +33,32 @@ const VideoPlayer = () => {
     setShowSelectFile(false); // Hide the "Select a file" div
   };
 
-  // Function to handle clicking on "Select a file" div
-  const handleSelectFileClick = () => {
-    document.getElementById("fileInput").click();
-  };
-
   // Function to handle video end
   const handleVideoEnd = () => {
     // Restart the video when it ends
     videoRef.current.play();
   };
 
+  // Go back functionality
+  const handleGoBack = () => {
+    if (videoRef.current) {
+      videoRef.current.removeEventListener("ended", handleVideoEnd);
+    }
+    setShowController(false);
+    setSelectedVideo(null); // Set selected video to null
+    setShowSelectFile(true); // Show the "Select a file" div again
+  };
+
+  const handleSelectFileClick = () => {
+    document.getElementById("fileInput").click();
+  };
+  
+
   return (
     <>
       {showSelectFile && (
         <div
-          className="w-1/2 h-96 border-2 border-white flex justify-center items-center overflow-hidden flex-col relative rounded-xl cursor-pointer"
+          className="w-[700px] h-96 border-2 border-white flex justify-center items-center overflow-hidden flex-col relative rounded-xl cursor-pointer"
           onClick={handleSelectFileClick}
         >
           <Image src={"/image.png"} alt="Image" width={300} height={300} />
@@ -62,7 +69,7 @@ const VideoPlayer = () => {
         </div>
       )}
       <main
-        className={`w-1/2 h-96 border-2 border-white flex justify-center items-center overflow-hidden flex-col relative rounded-xl ${
+        className={`w-[700px] h-96 border-2 border-white flex justify-center items-center overflow-hidden flex-col relative rounded-xl ${
           selectedVideo ? "" : "hidden"
         }`}
         onMouseEnter={showControllerHandler}
@@ -82,23 +89,39 @@ const VideoPlayer = () => {
           </video>
         )}
 
-        {/* -------------- Controller Component */}
         {showController && selectedVideo && (
-          <div className="absolute flex justify-between items-center px-5 w-full h-16 bottom-0 left-0">
-            {/*--------------------- Left side component ---------------------*/}
-            <Volume videoRef={videoRef} />
+          <span
+            onClick={handleGoBack}
+            className="absolute cursor-pointer top-5 left-5 p-1 bg-black/80 rounded-full"
+          >
+            {/*--------------------- Go Back Icons ---------------------*/}
+            <IoMdArrowRoundBack />
+          </span>
+        )}
 
-            {/*------------------ Middle component ------------------*/}
-            <PlayPause videoRef={videoRef} />
+        {/* -------------- Controller Component */}
+        {(showController || !selectedVideo) && (
+          <div className="absolute flex justify-between items-center flex-col space-y-2 w-full h-16 bottom-0 left-0">
+            {/*--------------------- Progress Bar component ---------------------*/}
+            <div className="w-full mx-4 flex justify-center items-center">
+            <ProgressBar videoRef={videoRef} />
+            </div>
+            <div className="w-full flex h-full absolute justify-between items-center px-5">
+              {/*--------------------- Left side component ---------------------*/}
+              <Volume videoRef={videoRef} />
 
-            {/*--------------- Right Side component ---------------*/}
-            <div className="flex space-x-3">
-              {/* speed component */}
-              <Speed videoRef={videoRef} />
-              {/* PiP component */}
-              <PicInPic videoRef={videoRef} />
-              {/* Full/Half screen component */}
-              <FullScreen videoRef={videoRef} />
+              {/*------------------ Middle component ------------------*/}
+              <PlayPause videoRef={videoRef} />
+
+              {/*--------------- Right Side component ---------------*/}
+              <div className="flex space-x-3">
+                {/* speed component */}
+                <Speed videoRef={videoRef} />
+                {/* PiP component */}
+                <PicInPic videoRef={videoRef} />
+                {/* Full/Half screen component */}
+                <FullScreen videoRef={videoRef} />
+              </div>
             </div>
           </div>
         )}
