@@ -62,7 +62,7 @@ const VideoPlayer = () => {
           onClick={handleSelectFileClick}
         >
           <Image src={"/image.png"} alt="Image" width={300} height={300} />
-          <div className="font-bold text-xl w-full text-center">
+          <div className="font-bold text-xl w-full text-center text-white">
             Select a file from the{" "}
             <span className="text-blue-600">Storage</span>
           </div>
