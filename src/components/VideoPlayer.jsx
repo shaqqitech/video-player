@@ -8,6 +8,7 @@ import PicInPic from "./PicInPic";
 import FullScreen from "./FullScreen";
 import Image from "next/image";
 import ProgressBar from "./ProgressBar";
+import Screenshot from "./Screenshot";
 
 const VideoPlayer = () => {
   const videoRef = useRef(null);
@@ -52,7 +53,8 @@ const VideoPlayer = () => {
   const handleSelectFileClick = () => {
     document.getElementById("fileInput").click();
   };
-  
+
+
 
   return (
     <>
@@ -99,7 +101,7 @@ const VideoPlayer = () => {
           </span>
         )}
 
-        {/* -------------- Controller Component */}
+        {/* -------------- Controller Components */}
         {(showController || !selectedVideo) && (
           <div className="absolute flex justify-between items-center flex-col space-y-2 w-full h-16 bottom-0 left-0">
             {/*--------------------- Progress Bar component ---------------------*/}
@@ -121,6 +123,8 @@ const VideoPlayer = () => {
                 <PicInPic videoRef={videoRef} />
                 {/* Full/Half screen component */}
                 <FullScreen videoRef={videoRef} />
+                {/* Screenshot component */}
+                <Screenshot videoRef={videoRef} />
               </div>
             </div>
           </div>
